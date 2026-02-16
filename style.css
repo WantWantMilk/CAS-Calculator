@@ -1,0 +1,165 @@
+/* style.css - 完全独立，专注于外观，半透明毛玻璃效果，圆角，移动优先 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(145deg, #2b3a4a 0%, #1d2b36 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    margin: 0;
+}
+
+.calculator {
+    width: 100%;
+    max-width: 500px;          /* 移动端友好，大屏也不过分宽 */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-radius: 36px;
+    padding: 24px 18px 30px 18px;
+    box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.3),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* 显示区域 */
+.display-area {
+    background: rgba(10, 20, 30, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 28px;
+    padding: 18px 16px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.expr-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 1.9rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
+    margin-bottom: 12px;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.expr-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+.result-panel {
+    min-height: 3.2rem;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 22px;
+    padding: 14px 18px;
+    color: #c3e2fc;
+    font-size: 1.6rem;
+    font-weight: 300;
+    word-break: break-word;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
+    transition: background 0.2s;
+}
+
+/* 按钮网格 */
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+}
+
+/* 所有按钮基础样式 */
+.btn {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 24px;               /* 大圆角 */
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 400;
+    padding: 16px 0;
+    text-align: center;
+    box-shadow: 0 8px 12px -6px rgba(0, 0, 0, 0.3),
+                inset 0 1px 2px rgba(255,255,255,0.4);
+    transition: all 0.1s ease;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    line-height: 1.2;
+}
+
+/* 移动端增大点击区域，文字稍小适配6列 */
+@media (max-width: 420px) {
+    .btn {
+        font-size: 1.2rem;
+        padding: 14px 0;
+        border-radius: 20px;
+    }
+    .expr-input {
+        font-size: 1.6rem;
+    }
+    .result-panel {
+        font-size: 1.4rem;
+    }
+}
+
+.btn:active {
+    transform: scale(0.94);
+    background: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 4px 8px -3px rgba(0, 0, 0, 0.4);
+}
+
+/* 不同类型微调颜色 (保持半透明柔和) */
+.btn.cas {
+    background: rgba(170, 210, 255, 0.25);
+    font-weight: 500;
+    color: #ddf0ff;
+}
+.btn.clear, .btn.backspace {
+    background: rgba(255, 130, 130, 0.25);
+    color: #ffe1e1;
+}
+.btn.equals {
+    background: rgba(120, 220, 180, 0.3);
+    color: #e0fff0;
+    font-weight: 600;
+}
+.btn.operator {
+    background: rgba(255, 200, 150, 0.25);
+    color: #ffefd0;
+}
+.btn.func, .btn.const, .btn.paren {
+    background: rgba(210, 180, 255, 0.2);
+}
+.btn.digit {
+    background: rgba(255, 255, 255, 0.2);
+    font-weight: 500;
+}
+
+/* 禁用点击波状干扰 */
+.btn:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
+}
+
+/* 空白网格自动留空 (由于刚好36个按钮无空白，此样式保留备用) */
+.button-grid .btn:empty {
+    display: none;
+}
