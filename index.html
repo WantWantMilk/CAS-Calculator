@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>轻量CAS计算器 · 半透明毛玻璃</title>
+    <!-- 使用 math.js 提供计算机代数系统核心功能 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.0/math.js"></script>
+    <!-- 样式文件独立 (便于后期修改) -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator">
+        <!-- 显示区域：表达式输入 & 结果输出 -->
+        <div class="display-area">
+            <input type="text" id="expression" class="expr-input" placeholder="输入表达式..." value="x^2 + 2*x + 1">
+            <div id="result" class="result-panel">结果将显示在这里</div>
+        </div>
+
+        <!-- 按钮区域：所有按钮统一放在grid容器中，共6行，每行6列（完全填满） -->
+        <div class="button-grid" id="buttonGrid">
+            <!-- 第1行 CAS功能 + 清除 -->
+            <button class="btn cas" data-action="simplify">Simplify</button>
+            <button class="btn cas" data-action="derivative">Derivative</button>
+            <button class="btn cas" data-action="expand">Expand</button>
+            <button class="btn cas" data-action="evaluate">Eval</button>
+            <button class="btn clear" data-action="clear">C</button>
+            <button class="btn backspace" data-action="backspace">⌫</button>
+
+            <!-- 第2行 常数 & 基础三角函数 -->
+            <button class="btn const" data-value="x">x</button>
+            <button class="btn const" data-value="pi">π</button>
+            <button class="btn const" data-value="e">e</button>
+            <button class="btn func" data-value="sin(">sin</button>
+            <button class="btn func" data-value="cos(">cos</button>
+            <button class="btn func" data-value="tan(">tan</button>
+
+            <!-- 第3行 更多函数 & 括号 & 除号 -->
+            <button class="btn func" data-value="log(">ln</button>      <!-- ln -> math.log 自然对数 -->
+            <button class="btn func" data-value="log10(">log</button>   <!-- log -> math.log10 常用对数 -->
+            <button class="btn func" data-value="sqrt(">sqrt</button>
+            <button class="btn paren" data-value="(">(</button>
+            <button class="btn paren" data-value=")">)</button>
+            <button class="btn operator" data-value="/">/</button>
+
+            <!-- 第4行 数字7-9 以及 + - * -->
+            <button class="btn digit" data-value="7">7</button>
+            <button class="btn digit" data-value="8">8</button>
+            <button class="btn digit" data-value="9">9</button>
+            <button class="btn operator" data-value="+">+</button>
+            <button class="btn operator" data-value="-">-</button>
+            <button class="btn operator" data-value="*">*</button>
+
+            <!-- 第5行 数字4-6 以及乘方 ^ 和 括号 (  )  （提供多个括号方便输入） -->
+            <button class="btn digit" data-value="4">4</button>
+            <button class="btn digit" data-value="5">5</button>
+            <button class="btn digit" data-value="6">6</button>
+            <button class="btn operator" data-value="^">^</button>
+            <button class="btn paren" data-value="(">(</button>
+            <button class="btn paren" data-value=")">)</button>
+
+            <!-- 第6行 数字1-3, 0, 小数点, 等号 (等号触发eval) -->
+            <button class="btn digit" data-value="1">1</button>
+            <button class="btn digit" data-value="2">2</button>
+            <button class="btn digit" data-value="3">3</button>
+            <button class="btn digit" data-value="0">0</button>
+            <button class="btn dot" data-value=".">.</button>
+            <button class="btn equals" data-action="evaluate">=</button>
+        </div>
+        <!-- 提示：可手动编辑输入框，点击按钮自动追加 -->
+    </div>
+    <!-- 脚本文件独立 (便于后期修改) -->
+    <script src="script.js"></script>
+</body>
+</html>
